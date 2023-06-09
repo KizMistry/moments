@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
-import { response } from "msw";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export const CurrentUserContext = createContext();
@@ -31,7 +30,7 @@ export const CurrentUserProvider = ({ children }) => {
     axiosReq.interceptors.response.use(
       async (config) => {
         try {
-          await axios.post("dj-rest-auth/token/refresh/");
+          await axios.post("/dj-rest-auth/token/refresh/");
         } catch (err){
           setCurrentUser((prevCurrentUser) => {
             if (prevCurrentUser) {
@@ -46,7 +45,7 @@ export const CurrentUserProvider = ({ children }) => {
       (err) => {
         return Promise.reject(err);
       }
-    ), [history];
+    );
 
     axiosRes.interceptors.response.use(
       (response) => response,
