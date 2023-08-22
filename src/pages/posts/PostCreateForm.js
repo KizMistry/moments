@@ -14,7 +14,7 @@ import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
-import Asset from "../../components/Assets";
+import Asset from "../../components/Asset";
 
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
