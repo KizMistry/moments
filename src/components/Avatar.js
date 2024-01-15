@@ -7,8 +7,8 @@ const Avatar = ({ src, height = 45, text }) => {
       <img
         className={styles.Avatar}
         src={src}
-        width={height}
         height={height}
+        width={height}
         alt="avatar"
       />
       {text}

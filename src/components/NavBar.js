@@ -10,6 +10,7 @@ import {
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+import { removeTokenTimestamp } from "../utils/utils";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -21,10 +22,12 @@ const NavBar = () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
+      removeTokenTimestamp()
     } catch (err) {
       console.log(err);
     }
   };
+
   const addPostIcon = (
     <NavLink
       className={styles.NavLink}
@@ -57,7 +60,7 @@ const NavBar = () => {
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
       >
-        <Avatar src={currentUser?.profile_image} text="profile" height={40} />
+        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
       </NavLink>
     </>
   );
@@ -68,14 +71,14 @@ const NavBar = () => {
         activeClassName={styles.Active}
         to="/signin"
       >
-        <i className="fas fa-sign-in-alt"></i>Sign In
+        <i className="fas fa-sign-in-alt"></i>Sign in
       </NavLink>
       <NavLink
+        to="/signup"
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/signup"
       >
-        <i className="fas fa-user-plus"></i>Sign Up
+        <i className="fas fa-user-plus"></i>Sign up
       </NavLink>
     </>
   );
@@ -109,6 +112,7 @@ const NavBar = () => {
             >
               <i className="fas fa-home"></i>Home
             </NavLink>
+
             {currentUser ? loggedInIcons : loggedOutIcons}
           </Nav>
         </Navbar.Collapse>
